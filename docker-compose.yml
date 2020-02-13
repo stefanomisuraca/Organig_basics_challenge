@@ -1,0 +1,37 @@
+version: '2'
+services:
+  api:
+    build: .
+    command: ['python3', 'manage.py', 'runserver', '0.0.0.0:8000']
+    environment:
+      # DJANGO SETTINGS
+      - DEBUG=True
+      - DB_ENGINE=django.db.backends.mysql
+      - DB_HOSTNAME=db
+      - DB_USER=root
+      - DB_PASSWORD=rootpass
+      - DB_NAME=ob
+      - LOG_LEVEL=DEBUG
+      - GH_GRAPHQL_ENDPOINT=https://api.github.com/graphql
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./:/app
+  db:
+    image: mysql:5.7
+    command: ['--character-set-server=utf8', '--collation-server=utf8_general_ci']
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpass
+      - MYSQL_DATABASE=ob
+      - MYSQL_USER=ob
+      - MYSQL_PASSWORD=dbpass
+      - MYSQL_HOST=%
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

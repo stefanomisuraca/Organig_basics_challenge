@@ -1,0 +1,7 @@
+version: '2'
+services:
+  api:
+    environment:
+      - GH_CLIENT_ID=380c2cf5f8f85e6e6238
+      - GH_CLIENT_SECRET=1f7dc2ce923c5ffc6fe975bc3b0ce960f3bcf79b
+      - GH_PERSONAL_TOKEN=5b94a8c237381f4e4708bccfaf3e909626c604c3
